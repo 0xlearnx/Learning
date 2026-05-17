@@ -6,7 +6,7 @@ void swap(int *a, int *b){
   *b=c;
 }
 
-void main(){
+int main(){
 
 int a,b;
 int *x,*y;
@@ -16,5 +16,5 @@ scanf("%d %d",x,y);
 printf("\nbefore %d %d\n",*x,*y);
 swap(x,y);
 printf("After %d %d",*x,*y);
-
+return 0;
 }
