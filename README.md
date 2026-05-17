@@ -1,51 +1,38 @@
-# 📚 C Networking Learning Repository
-> A collaborative space to learn, experiment, and build progressive network systems in C.
+# 📚 C Learning Archive
+> Centralized mission tracker & version control hub for completed C projects.
 
-## 🎯 Repository Purpose
-This is a **learning-focused repository** that will host multiple C projects over time. Each developer works independently on their own branch, tests thoroughly, and pushes completed code to `main` inside a dedicated named folder.
+## 🎯 Purpose
+This repository is an **archive and progress tracker**. Active development happens in **separate, dedicated repositories** created per mission. Once a project is complete, tested, and finalized, developers push their code here into a personal folder for long-term reference, comparison, and version control.
 
-**🔥 Current Focus:** Progressive TCP Server Evolution
-1. `simple-tcp` → Blocking single-client server
-2. `multi-tcp` → Concurrent multi-client server 
-3. `epoll-tcp` → Event-driven C10K-ready server
-4. `xdp-tool` → Kernel-space packet limiter/observer
+## 🔄 Workflow
+1. 🛠️ **Create a separate repo** for the current mission
+2. 💻 **Develop & iterate** freely in that repo
+3. ✅ **Finalize** (clean compile, zero leaks, tested features)
+4. 📦 **Archive here** by pushing to your named folder in this repo
+5. 📖 **Review & compare** implementations after merging
 
-## 👥 Collaboration Workflow
-- ✅ Work & test on your **own branch** 
-- ✅ Never push incomplete or broken code to `main`
-- ✅ When your project is complete & tested, push it to:
-  `main/<your_name>/<project_name>/`
-- ✅ Each folder must be **self-contained** (source code + `Makefile` + run instructions)
-- ✅ Compare implementations after merging to learn trade-offs & optimizations
+Each archived folder must be **self-contained**: source code, `Makefile`, and a `README.md` with build/run instructions.
 
-> Each developer maintains their own namespace. `main` stays clean, organized, and fully runnable.
-
-## ✅ Current Task: `multi-tcp` Server
-Build a concurrent TCP server that:
-- [ ] Listens on a configurable port
-- [ ] Handles ≥2 clients simultaneously (`pthreads`, `fork`, or `select`/`poll`)
+## 🎯 Current Mission: Multi-Client TCP Server
+Develop in your personal repo, then archive when:
+- [ ] Listens on a configurable port (`-p` flag or env)
+- [ ] Handles ≥2 concurrent clients (`pthreads`, `fork`, or `select`/`poll`)
 - [ ] Echoes messages as `[HH:MM:SS] client_id: payload`
 - [ ] Handles `Ctrl+C` gracefully (signal handler + clean socket close)
 - [ ] Compiles cleanly: `gcc -Wall -Wextra -Werror`
-- [ ] Includes a `README.md` inside your folder with build/run steps
+- [ ] Zero memory leaks (`valgrind --leak-check=full`)
 
-## 🔄 How to Push Completed Code to `main`
+## 📥 How to Archive Completed Work
 ```bash
-# 1. Sync with latest main
+# 1. Sync this archive repo
 git checkout main
 git pull origin main
 
-# 2. Finish & test on your branch
-git checkout your_branch
-make clean && make
-./server -p 8080  # verify it works
-
-# 3. Create your named folder at the repo root
+# 2. Prepare your named folder at the repo root
 mkdir -p your_name/multi-tcp
-cp -r src/ Makefile README.md your_name/multi-tcp/
+cp -r /path/to/your/finalized/project/* your_name/multi-tcp/
 
-# 4. Commit & push to main
-git checkout main
+# 3. Commit & push to archive
 git add your_name/multi-tcp/
-git commit -m "feat(your_name): complete multi-tcp server"
+git commit -m "archive(your_name): multi-tcp server complete"
 git push origin main
